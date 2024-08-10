@@ -10,7 +10,7 @@ import java.net.URL
 // Should take in a request url as string and receive a JSON object
 object APIRequestHelper {
     def fetch(fetchURL: String): JsObject = {
-        val uri = Uri.parse(fetchURL).getOrElse(throw new IllegalArgumentException("Invalid URL"))
+        val uri = Uri.parse(fetchURL).getOrElse(throw new IllegalArgumentException("Invalid URI"))
         val response = quickRequest
         .get(uri)
         .send()

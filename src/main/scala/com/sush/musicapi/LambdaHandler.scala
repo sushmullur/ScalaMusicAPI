@@ -9,7 +9,6 @@ object LambdaHandler {
     val client = DeezerClient.default()
     
     def main(args: Array[String]): Unit = {
-        val artist = client.getArtist(tempArtistId)
-        println(artist.name)
+        println(client.searchArtist("juice"))
     }
 }
