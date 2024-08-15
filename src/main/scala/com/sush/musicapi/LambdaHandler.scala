@@ -25,7 +25,7 @@ class LambdaHandler extends RequestHandler[Map[String, String], String] {
             case Some(("artist", query)) =>
                 Deezer.searchArtist(query).toString
             case Some((key, _)) =>
-                s"Unable to query by $key" 
+                s"Bad request $key" 
             case None =>
                 "Bad request"
         }
