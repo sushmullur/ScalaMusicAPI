@@ -9,7 +9,6 @@ import scala.collection.JavaConverters._
 
 object LocalHandler {
 
-    val TempArtistId = 4495513
     val Deezer = DeezerClient.default()
     
     // For local testing
@@ -22,6 +21,13 @@ class LambdaHandler extends RequestHandler[Map[String, String], String] {
     import LocalHandler._
 
     override def handleRequest(input: Map[String, String], context: Context): String = {
-        Deezer.searchArtist("juice").toString
+        input.asScala.headOption match {
+            case Some(("artist", query)) =>
+                Deezer.searchArtist(query).toString
+            case Some((key, _)) =>
+                s"Unable to query by $key" 
+            case None =>
+                "Bad request"
+        }
     }
 }
