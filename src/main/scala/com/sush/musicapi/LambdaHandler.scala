@@ -21,9 +21,13 @@ class LambdaHandler extends RequestHandler[Map[String, String], String] {
     import LocalHandler._
 
     override def handleRequest(input: Map[String, String], context: Context): String = {
+        callAPI(input, Deezer)
+    }
+
+    private [musicapi] def callAPI(input: Map[String, String], deezer: DeezerClient): String = {
         input.asScala.headOption match {
             case Some(("artist", query)) =>
-                Deezer.searchArtist(query).toString
+                deezer.searchArtist(query).toString
             case Some((key, _)) =>
                 s"Bad request $key" 
             case None =>
